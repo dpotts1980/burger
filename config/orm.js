@@ -2,7 +2,7 @@ var connection = require("../config/connection.js");
 
 
 //this will create question marks when we write our queries//
-/* function createQuestionMarks(num) {
+function createQuestionMarks(num) {
     var arr = [];
   
     for (var i = 0; i < num; i++) {
@@ -11,7 +11,7 @@ var connection = require("../config/connection.js");
   
     return arr.toString();
   }//end of createQuestionMarks
- */
+
   //here is where we create our function to convert object(key/value) to sql//
   function objectToSql(obj) {
     var arr = [];
@@ -28,16 +28,16 @@ var connection = require("../config/connection.js");
   //object for all our sql statement functions
 
   var orm = {
-    selectAll: function(table, cb) {
-      var queryString = 'SELECT * FROM ' + table + ';';
+    selectAll: function(tableInput, cb) {
+      var queryString = 'SELECT * FROM ' + tableInput + ';';
       connection.query(queryString, function(err, result){
         if (err) throw err;
         cb(result);
       })
     }, //end of selectAll
 
-    insertOne: function (table, burger_name, cb) {
-      var queryString = "INSERT INTO " + table + " (burger_name) VALUES ('" + burger_name + "')";
+    insertOne: function (tableInput, burger_name, cb) {
+      var queryString = "INSERT INTO " + tableInput + " (burger_name) VALUES ('" + burger_name + "')";
       console.log(queryString);
       connection.query(queryString, function (err, result) {
         if (err) throw err;
@@ -45,11 +45,11 @@ var connection = require("../config/connection.js");
       });
     },//end of insertOne
 
-    updateOne: function (table, objColVals, condition, cb) {
-      var queryString = 'UPDATE ' + table;
+    updateOne: function (tableInput, objColumnVals, condition, cb) {
+      var queryString = 'UPDATE ' + tableInput;
   
       queryString = queryString + ' SET ';
-      queryString = queryString + objToSql(objColVals);
+      queryString = queryString + objToSql(objColumnVals);
       queryString = queryString + ' WHERE ';
       queryString = queryString + condition;
       console.log(condition);
