@@ -13,17 +13,17 @@ function createQuestionMarks(num) {
   }//end of createQuestionMarks
 
   //here is where we create our function to convert object(key/value) to sql//
-  function objectToSql(obj) {
+  function objToSql(ob) {
+  
     var arr = [];
-
-    for (var key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        arr.push(key + '=' + obj[key]);
-      }
-
-      return arr.toString();
+  
+    for (var key in ob) {
+      arr.push(key + "=" + ob[key]);
+    }
+  
+    return arr.toString();
   }
-}//end of objectToSql
+//end of objToSql
 
   //object for all our sql statement functions
 

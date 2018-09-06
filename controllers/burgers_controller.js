@@ -6,15 +6,15 @@ var burger = require('../models/burger.js');
 
 //creating our routes
 router.get("/", function(req, res) {
-    burger.selectAll(function (data) {
+    burger.all(function (data) {
 		var hbsObject = { burgers: data };
-		console.log(hbsObject);
+		console.log("Node getall:",hbsObject);
 		res.render('index', hbsObject);
 	});
 });//end of router.get//
 
 router.post("/", function(req, res) {
-    burger.insertOne([
+    burger.create([
       "burger_name", "devoured"
     ], [
       req.body.burger_name, req.body.devoured
@@ -23,12 +23,12 @@ router.post("/", function(req, res) {
     });
   });//end of router.post
 
-  router.put("/:id", function(req, res) {
+  router.get("/burgers/update/:id", function(req, res) {
     var condition = "id = " + req.params.id;
   
     console.log("condition", condition);
   
-    burger.updateOne({
+    burger.update({
       devoured: req.body.devoured
     }, condition, function() {
       res.redirect("/");
